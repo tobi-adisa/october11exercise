@@ -73,7 +73,7 @@ struct Officer: Comparable {
     self.ship = ship
   }
 
-  // To make this struct conform to Equatable protocol
+  // To make this struct conform to Equatable protocol.
   // Note that since matching all properties, this would
   // have been given automatically when made Equatable
   static func ==(lhs: Officer, rhs: Officer) -> Bool {
