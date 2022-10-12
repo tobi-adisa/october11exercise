@@ -53,13 +53,8 @@ func isFemale (_ inputOfficer: String)-> Bool {
 
 // Q2: How many first officers are human?
 
-func isHuman (_ inputOfficer: String)-> Bool {
-  return humanOfficers.contains(inputOfficer)
-}
-var firstNames = Array(firstOfficers.keys)
-
-firstNames.filter(isHuman(_:)).count
-
+var firstHumanCount = firstOfficers.filter({humanOfficers.contains($0.key)}).count
+firstHumanCount
 
 // Q3: Get a list of females sorted by name
 
@@ -95,11 +90,8 @@ struct Officer: Comparable {
 Group 1
 */
 // Q4: Create an array of officer objects who captain starships
-var officerArray: [Officer] = []
-for officer in captains{
-  var newOfficer = Officer(name: officer.key, ship: officer.value)
-  officerArray.append(newOfficer)
-}
+var officerArray = captains.map({Officer.init(name: $0.key, ship: $0.value)})
+
 officerArray
 
 
@@ -114,25 +106,15 @@ Group 2
 */
 // Q6: Create an array of officers serving as first officers who are also Vulcan
 
-var vulcanOfficerArray: [Officer] = []
-for officer in firstOfficers{
-  if vulcanOfficers.contains(officer.key){
-    var newOfficer = Officer(name: officer.key, ship: officer.value)
-    vulcanOfficerArray.append(newOfficer)
-  }
-}
+var vulcanOfficerArray = firstOfficers.filter({vulcanOfficers.contains($0.key)}).map({Officer.init(name: $0.key, ship: $0.value)})
+
 
 vulcanOfficerArray
 
 
 
 // Q7: How many these Vulcan first officers have names shorter than 5 characters?
-var count = 0
-for officer in vulcanOfficerArray {
-  if officer.name.count < 5 {
-    count += 1
-  }
-}
+var count = vulcanOfficerArray.reduce(0, {$1.name.count < 5 ? $0 + 1 : $0})
 count
 
 
